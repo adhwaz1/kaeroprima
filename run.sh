@@ -29,7 +29,7 @@ mysql -u root -e "CREATE USER IF NOT EXISTS '$database_id'@'localhost' IDENTIFIE
 mysql -u root -e "GRANT ALL PRIVILEGES ON $database_id.* TO '$database_id'@'localhost'"
 mysql -u root -e "FLUSH PRIVILEGES"
 
-mysql -u kaeroprima -p < kaero_prima.sql  
+mysql -u kaeroprima -p < ./kaero_prima.sql  
 
 # Create .env file
 echo "Creating .env file" > /var/www/html/index.html
@@ -50,8 +50,6 @@ echo "Installing Laravel" > /var/www/html/index.html
 /usr/local/bin/composer install
 echo "Configuring Laravel" > /var/www/html/index.html
 php artisan key:generate --force
-php artisan passport:keys --force
-php artisan kaeroprima:generate --force
 chgrp -R www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 chown -R $USER:www-data .
