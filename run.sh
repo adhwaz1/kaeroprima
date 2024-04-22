@@ -15,7 +15,7 @@ a2enmod php8.2
 php --version
 
 # Install composer
-echo "Installing Composer" > /var/www/html/index.html
+echo "Installing   Composer" > /var/www/html/index.html
 export HOME=/root
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -29,9 +29,7 @@ mysql -u root -e "CREATE USER IF NOT EXISTS '$database_id'@'localhost' IDENTIFIE
 mysql -u root -e "GRANT ALL PRIVILEGES ON $database_id.* TO '$database_id'@'localhost'"
 mysql -u root -e "FLUSH PRIVILEGES"
 
-mysql -u root
-use $database_id;
-source ./kaero_prima.sql;  
+mysql -u username -p kaeroprima < kaero_prima.sql  
 
 # Create .env file
 echo "Creating .env file" > /var/www/html/index.html
