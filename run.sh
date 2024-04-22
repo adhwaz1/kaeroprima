@@ -23,7 +23,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 # Create database
 echo "Creating database" > /var/www/html/index.html
 systemctl start mysql.service
-database_id='keroprima'
+database_id='kaeroprima'
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $database_id"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$database_id'@'localhost' IDENTIFIED BY '$database_id'"
 mysql -u root -e "GRANT ALL PRIVILEGES ON $database_id.* TO '$database_id'@'localhost'"
@@ -50,13 +50,14 @@ echo "Installing Laravel" > /var/www/html/index.html
 /usr/local/bin/composer install
 echo "Configuring Laravel" > /var/www/html/index.html
 php artisan key:generate --force
+
 chgrp -R www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 chown -R $USER:www-data .
 
 # Migrate database
 echo "Migrating database" > /var/www/html/index.html
-php artisan migrate --force
+php artisan migrate --seed --force
 
 
 # Configure Apache
