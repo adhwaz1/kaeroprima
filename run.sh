@@ -29,7 +29,8 @@ mysql -u root -e "CREATE USER IF NOT EXISTS '$database_id'@'localhost' IDENTIFIE
 mysql -u root -e "GRANT ALL PRIVILEGES ON $database_id.* TO '$database_id'@'localhost'"
 mysql -u root -e "FLUSH PRIVILEGES"
 
-mysql -u kaeroprima -p < ./kaero_prima.sql  
+mysql -u root -e "use '$database_id'"
+mysql -u root -e "source ./kaero_prima.sql"
 
 # Create .env file
 echo "Creating .env file" > /var/www/html/index.html
@@ -63,8 +64,8 @@ php artisan migrate --seed --force
 echo "Configuring Apache" > /var/www/html/index.html
 echo "<VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/html/public
-    <Directory /var/www/html/public>
+    DocumentRoot /var/www/html/kaeroprima/public
+    <Directory /var/www/html/kaeroprima/public>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
@@ -86,8 +87,8 @@ cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/de
 echo "<IfModule mod_ssl.c>
     <VirtualHost _default_:443>
         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html/public
-        <Directory /var/www/html/public>
+        DocumentRoot /var/www/html/kaeroprima/public
+        <Directory /var/www/html/kaeroprima/public>
             Options -Indexes +FollowSymLinks +MultiViews
             AllowOverride All
             Require all granted
