@@ -58,10 +58,6 @@ chown -R $USER:www-data .
 # Migrate database
 echo "Migrating database" > /var/www/html/index.html
 php artisan migrate --seed --force
-chgrp -R www-data storage bootstrap/cache
-chmod -R ug+rwx storage bootstrap/cache
-chown -R $USER:www-data .
-
 
 # Configure Apache
 echo "Configuring Apache" > /var/www/html/index.html
