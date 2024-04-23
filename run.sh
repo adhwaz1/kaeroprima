@@ -41,7 +41,7 @@ echo "DB_DATABASE=kaeroprima" >> .env
 echo "DB_USERNAME=kaeroprima" >> .env
 echo "DB_PASSWORD=kaeroprima" >> .env
 
-echo "APP_ENV=production" >> .env
+echo "APP_ENV=local" >> .env
 echo "APP_DEBUG=true" >> .env
 
 
