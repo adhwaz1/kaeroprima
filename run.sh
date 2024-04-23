@@ -28,7 +28,7 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS $database_id"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$database_id'@'localhost' IDENTIFIED BY '$database_id'"
 mysql -u root -e "GRANT ALL PRIVILEGES ON $database_id.* TO '$database_id'@'localhost'"
 mysql -u root -e "FLUSH PRIVILEGES"
-mysql -u root kaeroprima -p kaeroprima < ./kaero_prima.sql
+mysql -uroot -p kaeroprima < kaero_prima.sql 
 
 # Create .env file
 echo "Creating .env file" > /var/www/html/index.html
